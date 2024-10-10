@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/meal.dart';
@@ -39,12 +40,35 @@ class MealsScreen extends StatelessWidget {
     );
     //meals isn't empty
     if(meals.isNotEmpty){
-      content= ListView.builder(
-        itemCount: meals.length,
-          itemBuilder: (context,index)=>Text(
-        meals[index].title,
-            //style: TextStyle(color: Colors.white,),
-      ));
+      content= Container(
+
+        padding: EdgeInsets.all(16),
+
+        child: ListView.builder(
+          itemCount: meals.length,
+            itemBuilder: (context,index)=>Column(
+
+              children: [
+                InkWell(
+                  onTap: (){
+
+                  },
+                  child: Text(
+
+                    meals[index].title,
+                    style: TextStyle(height: 2, fontSize: 15,fontWeight: FontWeight.bold,),
+                  ),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20), // Image border
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(150), // Image radius
+                    child: Image.network(meals[index].imageUrl, fit: BoxFit.cover),
+                  ),
+                )
+              ]
+            )),
+      );
     }
     return Scaffold(
       appBar: AppBar(
