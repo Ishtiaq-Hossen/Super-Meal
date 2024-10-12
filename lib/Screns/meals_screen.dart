@@ -1,19 +1,31 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:super_meal_v2/Screns/meal_detail_screen.dart';
+import 'package:super_meal_v2/widgets/meal_item.dart';
 
 import '../models/meal.dart';
 
 class MealsScreen extends StatelessWidget {
-  final String title;
+  final String? title;
   final List<Meal>meals;
-
+  final void Function(Meal meal) onToggleFavourite;
 
   const MealsScreen({
     super.key,
-    required this.title,
-    required this.meals
+    this.title,
+    required this.meals,
+    required this.onToggleFavourite
   });
-
+  void onMealSelected(BuildContext context,Meal meal){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context)=> MealDetailScreen(
+        meal: meal,
+        onToggleFavourite: (meal){
+          onToggleFavourite(meal);
+        },
+      ))
+    );
+  }
   @override
   Widget build(BuildContext context) {
     Widget content= Center(
@@ -40,39 +52,21 @@ class MealsScreen extends StatelessWidget {
     );
     //meals isn't empty
     if(meals.isNotEmpty){
-      content= Container(
-
-        padding: EdgeInsets.all(16),
-
-        child: ListView.builder(
-          itemCount: meals.length,
-            itemBuilder: (context,index)=>Column(
-
-              children: [
-                InkWell(
-                  onTap: (){
-
-                  },
-                  child: Text(
-
-                    meals[index].title,
-                    style: TextStyle(height: 2, fontSize: 15,fontWeight: FontWeight.bold,),
-                  ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20), // Image border
-                  child: SizedBox.fromSize(
-                    size: Size.fromRadius(150), // Image radius
-                    child: Image.network(meals[index].imageUrl, fit: BoxFit.cover),
-                  ),
-                )
-              ]
-            )),
-      );
+      content= ListView.builder(
+        itemCount: meals.length,
+          itemBuilder: (context,index)=>MealItem(
+              meal: meals[index],
+            onSelectMeal: (meal){
+                onMealSelected(context, meal);
+            },
+          ));
+    }
+    if(title==null){
+      return content;
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
         body: content);
   }
