@@ -68,7 +68,9 @@ class MealItem extends StatelessWidget {
                     ),
                   ),
                     Row(
+
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                             MealItemTrait(
                               icon: Icons.schedule,
@@ -84,7 +86,7 @@ class MealItem extends StatelessWidget {
                               icon: Icons.attach_money,
                               label: affordabilityTest,
                             )
-        
+
                       ],
                     )
         
