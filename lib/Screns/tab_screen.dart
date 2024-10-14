@@ -4,6 +4,7 @@ import 'package:super_meal_v2/Screns/filter_screen.dart';
 import 'package:super_meal_v2/Screns/meals_screen.dart';
 import 'package:super_meal_v2/widgets/main_drawer.dart';
 
+import '../data/dummy_data.dart';
 import '../models/meal.dart';
 const KInitialFilter= {
   Filter.glutenFree:false,
@@ -66,8 +67,15 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final availableMeals = dummyMeals.where((meal) {
+      if(_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree){
+        return false;
+      }
+      return true;
+    }).toList();
     Widget activeScreen = CatagoriesScreen(
       onToggleFavourite: _toggleMealFavouriteStatus,
+      availableMeals: availableMeals,
     );
     var activeTitle = 'Categories';
     if (_selectedPageIndex == 1) {

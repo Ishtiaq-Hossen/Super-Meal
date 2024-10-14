@@ -7,15 +7,17 @@ import '../models/meal.dart';
 import 'meals_screen.dart';
 
 class CatagoriesScreen extends StatelessWidget {
+  final List<Meal> availableMeals;
   final void Function(Meal meal) onToggleFavourite;
   const CatagoriesScreen({
     super.key,
-    required this.onToggleFavourite
+    required this.onToggleFavourite,
+    required this.availableMeals,
   });
 
   void _onSelectCatagory(BuildContext context, Category category) {
     //filtering by category
-    final filteredMeals = dummyMeals
+    final filteredMeals = availableMeals
         .where((meal) => meal.categories.contains(category
             .id)) //ekta ekta meal check korbe .selected meal er catagory meal e true nahoi false
         .toList();
