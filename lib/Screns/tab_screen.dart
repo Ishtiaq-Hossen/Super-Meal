@@ -8,6 +8,10 @@ import '../data/dummy_data.dart';
 import '../models/meal.dart';
 const KInitialFilter= {
   Filter.glutenFree:false,
+  Filter.lactoseFree:false,
+  Filter.vegan:false,
+  Filter.vegetarian:false,
+
 };
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -71,8 +75,18 @@ class _TabScreenState extends State<TabScreen> {
       if(_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree){
         return false;
       }
+      if(_selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree){
+        return false;
+      }
+      if(_selectedFilters[Filter.vegan]! && !meal.isVegan){
+        return false;
+      }
+      if(_selectedFilters[Filter.vegetarian]! && !meal.isVegetarian){
+        return false;
+      }
       return true;
     }).toList();
+
     Widget activeScreen = CatagoriesScreen(
       onToggleFavourite: _toggleMealFavouriteStatus,
       availableMeals: availableMeals,
@@ -105,7 +119,7 @@ class _TabScreenState extends State<TabScreen> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.set_meal), label: 'Categories'),
-            BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favourites')
+            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favourites')
           ]),
     );
   }
