@@ -119,7 +119,7 @@ class _TabScreenState extends State<TabScreen> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.set_meal), label: 'Categories'),
-            BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favourites')
+            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favourites')
           ]),
     );
   }
