@@ -9,7 +9,6 @@ final theme = ThemeData(
       seedColor: const Color.fromARGB(255, 131, 57, 0)),
   textTheme: GoogleFonts.latoTextTheme(),
 );
-
 void main() {
   runApp(const MyApp());
 }
