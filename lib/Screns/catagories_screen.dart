@@ -37,6 +37,7 @@ class CatagoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(
+      padding: EdgeInsets.all(10),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,

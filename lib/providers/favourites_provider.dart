@@ -16,7 +16,7 @@ class FavouriteMealsNotifier extends StateNotifier<List<Meal>> {
       state = state.where((m) => m.id != meal.id).toList();
       return false;
     } else {
-      state = [...state, meal]; //state= new data list
+      state = [...state, meal]; //state= new data list//... spread operator
       return true;
     }
   }

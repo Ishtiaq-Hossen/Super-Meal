@@ -24,7 +24,8 @@ class MealItemTrait extends StatelessWidget {
             label,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 13
+              fontSize: 11,
+              fontWeight: FontWeight.bold
             ),
             overflow: TextOverflow.ellipsis
           ),

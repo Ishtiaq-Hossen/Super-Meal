@@ -7,13 +7,8 @@ import 'package:super_meal_v2/providers/favourites_provider.dart';
 import 'package:super_meal_v2/providers/meals_provider.dart';
 import 'package:super_meal_v2/widgets/main_drawer.dart';
 import '../models/meal.dart';
-const KInitialFilter= {
-  Filter.glutenFree:false,
-  Filter.lactoseFree:false,
-  Filter.vegan:false,
-  Filter.vegetarian:false,
+import '../providers/filter_provider.dart';
 
-};
 class TabScreen extends ConsumerStatefulWidget {
   const TabScreen({super.key});
 
@@ -31,7 +26,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   }
 
 
-  Map<Filter,bool>_selectedFilters=KInitialFilter;
+
 
 
 
@@ -39,13 +34,11 @@ class _TabScreenState extends ConsumerState<TabScreen> {
   void _setScreen(String identifier)async{
     Navigator.of(context).pop();
     if(identifier=='filters'){
-      final result= await Navigator.push<Map<Filter,bool>>(
+      await Navigator.push<Map<Filter,bool>>(
           context,MaterialPageRoute(builder: (ctx)=>FilterScreen(
-        currentFilters: _selectedFilters,
+
       )));
-      setState(() {
-        _selectedFilters=result ?? KInitialFilter;
-      });
+
     }
 
   }
@@ -53,23 +46,8 @@ class _TabScreenState extends ConsumerState<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final meals= ref.read(mealsProvider);
-    final availableMeals = meals.where((meal) {
-      if(_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree){
-        return false;
-      }
-      if(_selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree){
-        return false;
-      }
-      if(_selectedFilters[Filter.vegan]! && !meal.isVegan){
-        return false;
-      }
-      if(_selectedFilters[Filter.vegetarian]! && !meal.isVegetarian){
-        return false;
-      }
-      return true;
-    }).toList();
 
+    final availableMeals = ref.watch(filteredMealsProvider);
     Widget activeScreen = CatagoriesScreen(
 
       availableMeals: availableMeals,
