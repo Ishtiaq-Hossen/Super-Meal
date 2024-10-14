@@ -19,7 +19,6 @@ class MealItem extends StatelessWidget {
   }
   String get complexityTest{
     return meal.complexity.name[0].toUpperCase()+meal.complexity.name.substring(1);
-
   }
   @override
   Widget build(BuildContext context) {
