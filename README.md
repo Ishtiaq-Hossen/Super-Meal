@@ -13,6 +13,7 @@
 ## Technologies Used
 
 - Flutter: A cross-platform framework for building apps for both iOS and Android.
+- Riverpod state-management used for better data handling
 - Dart: Programming language used for the development of the app.
 
 ## Getting Started
